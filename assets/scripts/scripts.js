@@ -15,7 +15,7 @@ function initApp() {
     currentGameScreen = 'holding'
     initSockets()
 
-    endless = getUrlParameter('endless')
+    
     
     $('body').attr('data-orientation',gameOrientation)
 
@@ -23,6 +23,9 @@ function initApp() {
     let apph = gameOrientation == 'landscape' ? gameHeight : gameWidth;    
 
     $('#app-wrapper').css('width',appw).css('height',apph)
+
+    window.addEventListener('resize', scaleToFit);
+    window.addEventListener('load', scaleToFit);
 
     initFrames() 
     initGame()
@@ -195,6 +198,13 @@ function showGameOver() {
     setTimeout(function() {
         typeWriter('.gameOverText', gameOverCopy, 50, 50);
     }, menuAnimSpeed)
+
+    //Reset game automatically if user doesnt interact
+    setTimeout(function() {
+        if (currentGameScreen == 'gameover') {
+            resetGame()
+        }
+    }, gameOverTimeout)
 }
 
 

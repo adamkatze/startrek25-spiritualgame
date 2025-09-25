@@ -12,7 +12,7 @@ const maxIconLife = 12000                   //How long an untouched icon will st
 const iconSpawnTime = 3000                  //How frequently a new icon will spawn
 
 const playCollisionSFX = true               //If true, plays a sound effect on all icon and world boundray collisions
-
+const gameOverTimeout = 10000               //How long to wait after game over before automatically restarting the game
 
 
 
