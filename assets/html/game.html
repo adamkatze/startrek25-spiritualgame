@@ -1,0 +1,204 @@
+<html>
+  <head>
+    <script src="..\scripts\socket.io.js"></script>
+    <script src="..\scripts\jquery.js"></script>
+    <script src="..\scripts\phaser.min.js"></script>
+    <script src="..\scripts\scripts.js"></script>
+
+    <script src="..\scripts\gameSettings.js"></script>
+    <script src="..\scripts\game.js"></script>
+
+    <link rel="stylesheet" href="..\styles\css.css">
+  </head>
+
+
+
+<body class="gameView" id="body">
+  <div id="app-wrapper">
+
+        <section id="holding" class="gameScreen swapTar animIn">   
+            <div class="holdingCopy"></div>
+
+            <div class="holdingPlant plantWrapper">
+                <div class="plant" data-stage="4"></div>
+            </div>
+            <div class="plantGraphicBG"></div>
+
+            <div class="holdingArrows">
+                <div class="arrow" data-id="1"></div>
+                <div class="arrow" data-id="2"></div>
+                <div class="arrow" data-id="3"></div>
+            </div>
+
+            <div class="glowElements">
+                <div class="glowBlock" data-id="1"></div>
+                <div class="glowBlock" data-id="2"></div>
+                <div class="glowBlock" data-id="3"></div>
+            </div>
+
+            <div class="glowTabs">
+                <div class="glowTab" data-id="1"></div>
+                <div class="glowTab" data-id="2"></div>
+                <div class="glowTab" data-id="3"></div>
+            </div>
+
+            <div class="circleGraphic"></div>
+            
+            <button class="touchArea" onclick="begin()"></button>
+        </section>
+
+
+
+
+
+
+
+
+
+        <section id="instructions" class="gameScreen swapTar hide">  
+            <div class="plantGraphicBG"></div>
+            <div class="playerName"></div>
+
+            <div class="insTextGood textBlock"></div>
+            <div class="insTextBad textBlock"></div>
+            <div class="insTextBottom textBlock"></div>
+
+            <div class="insIconBlock good">
+                <div class="insIcon" data-id="1"></div>
+                <div class="insIcon" data-id="2"></div>
+                <div class="insIcon" data-id="3"></div>
+            </div>
+
+            <div class="insIconBlock bad">
+                <div class="insIcon" data-id="1"></div>
+                <div class="insIcon" data-id="2"></div>
+                <div class="insIcon" data-id="3"></div>
+            </div>
+            
+            <button class="next" onclick="startGame() ">
+                <img src="../images/button_ready.png">
+            </button>
+        </section>
+
+
+
+
+
+
+
+
+        <section id="gameWrapper" class="gameScreen swapTar hide">   
+            
+            <div class="gameUI background">
+                <div class="plantGraphicBG"></div>
+            </div>
+
+            <div class="gameUI overlay">
+
+                <div class="uiBlurFilters">
+                    <div class="uiBlur" data-id="1"></div>
+                    <div class="uiBlur" data-id="2"></div>
+                    <div class="uiBlur" data-id="3"></div>
+
+                    <div class="uiBlur" data-id="4"></div>
+                </div>
+
+                <div class="growthLevel">
+                    <div class="growthLevel-Icons">
+                        <div class="growthLevel-Icon" data-stage="0"></div>
+                        <div class="growthLevel-Icon" data-stage="1"></div>
+                        <div class="growthLevel-Icon" data-stage="2"></div>
+                        <div class="growthLevel-Icon" data-stage="3"></div>
+                        <div class="growthLevel-Icon" data-stage="4"></div>
+                    </div>
+                    <div class="gameTimer"></div>
+
+                </div>
+                <div class="nameBlock">
+                    <div class="nameBlock-Inner">
+                        <h5 class="playerName">
+                            Cadet<br>TestName
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="countDown">
+                    <div class="countDown-Value"></div>
+                </div>
+
+                <div class="plantWrapper">         
+                    <div class="plantWrapper-Inner">
+                        <img id="plantFrame">
+                        <div id="plantFrameGlow"></div>      
+                    </div>                         
+                </div>    
+
+                
+
+            </div>
+
+            <div class="gameContainer" id="gameContainer"></div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+        <section id="score" class="gameScreen swapTar hide">
+            <div class="plantGraphicBG"></div>
+                <div class="nameBlock">
+                    <div class="nameBlock-Inner">
+                        <h5 class="playerName">
+                            Cadet<br>TestName
+                        </h5>
+                    </div>
+                </div>
+
+            <div class="gameOver-Score"></div>
+
+            <div class="gameOverText textBlock"></div>
+            
+
+            <div class="gameOver-Plant plantWrapper">
+                    <div class="plant" data-stage="0"></div>
+                    <div class="plant" data-stage="1"></div>
+                    <div class="plant" data-stage="2"></div>
+                    <div class="plant" data-stage="3"></div>
+                    <div class="plant" data-stage="4"></div>
+            </div>
+
+            <div class="circleGraphic"></div>
+
+            <div class="glowTabs">
+                <div class="glowTab" data-id="1"></div>
+                <div class="glowTab" data-id="2"></div>
+                <div class="glowTab" data-id="3"></div>
+            </div>
+
+            <button class="next" onclick="resetGame()">
+                <img src="../images/button_complete.png">
+            </button>
+        </section>
+
+
+
+
+
+
+
+
+
+
+        <script>
+           initApp()        
+        </script>
+
+
+  </div>
+</body>
