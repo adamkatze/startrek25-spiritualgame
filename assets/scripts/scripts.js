@@ -12,6 +12,12 @@ var gameData = {}
 
 
 function initApp() {
+
+    //Check url params
+    const params = new URLSearchParams(window.location.search);
+
+
+
     currentGameScreen = 'holding'
     initSockets()
 
@@ -29,11 +35,12 @@ function initApp() {
 
     initFrames() 
     initGame()
-
-    window.addEventListener('resize', scaleToFit);
-    window.addEventListener('load', scaleToFit);
-
+    
     initHoldingScreen()
+
+    if (params.get("showSettings") == "true") {
+        initSettings() 
+    }
 
     typeWriter('.holdingCopy', holdingCopy, 50, 50);
 }
@@ -164,11 +171,9 @@ function startCountdown() {
     sfx_countdown.play()
 
     let countdownInterval = setInterval(function() {
-        if (cur <= 0) {
-            startTime = new Date()            
-            timerStart = true
-            clearInterval(countdownInterval)
-            $('.countDown').addClass('fadeOut')
+        if (cur <= 0) {            
+            clearInterval(countdownInterval)            
+            countdownFinished() 
         } else {
             sfx_countdown.play()
         }
@@ -184,6 +189,17 @@ function startCountdown() {
     }, 1000)
 }
 
+
+function countdownFinished() {
+    startTime = new Date()            
+    timerStart = true
+    $('.countDown').addClass('fadeOut')
+
+    for (let i = 0; i < initialIconCount; i++) {
+       spawnIcon()
+    }
+    spawnTimer.paused = false;
+}
 
 
 
@@ -583,4 +599,148 @@ function typeWriter(target, lines, charDelay = 80, lineDelay = 500) {
     }
 
     typeLine();
+}
+
+
+
+
+//--------------------Settings Menu---------------------------
+
+function initSettings() {
+
+    $('button.settingsOpen').addClass('active')
+
+    //Get saved settings
+    let savedSettings = JSON.parse(localStorage.getItem("savedSettings"));
+
+    console.log(savedSettings)
+
+    //Add an input for each setting in the list
+    $.each(settingsList, function(index, setting) {
+        console.log(setting)
+
+        //Get the default value
+        let curVar = setting.var
+        let defaultVal = window[setting.var]
+        let curVal
+
+        //Check if the current variable is in the saved settings
+
+        if (savedSettings?.hasOwnProperty(curVar)) {
+            curVal = savedSettings[curVar]
+            console.log('found saved setting')
+        } else {
+            curVal = window[setting.var]
+        }
+
+
+
+        if (setting.type == 'bool') {
+            $(`<div class="setting" data-var="${setting.var}">
+                    <input type="checkbox" data-default="${defaultVal}"/>
+                    <div class="label">
+                        <span class="label">${setting.var}</span>
+                        <span class="desc">${setting.desc}</span>
+                        <span class="default">Default: ${defaultVal}</span>
+                    </div>
+                </div>`).appendTo('.settings .inner')            
+            if (curVal == true || curVal == 'true') {   
+                $(`.setting[data-var="${setting.var}"] input`).prop('checked',true)
+            }           
+        }
+
+        if (setting.type == 'number') {
+            $(`<div class="setting" data-var="${setting.var}">
+                    <input type="number" data-default="${defaultVal}" value="${curVal}"/>
+                    <div class="label">
+                        <span class="label">${setting.var}</span>
+                        <span class="desc">${setting.desc}</span>
+                        <span class="default">Default: ${defaultVal}</span>
+                    </div>
+                </div>`).appendTo('.settings .inner')
+        }
+
+        //Set the new value
+        eval(curVar + " = curVal");
+
+
+    })
+       
+
+}
+
+
+
+
+function openSettings() {
+    $('.settings').addClass('active')
+}
+function closeSettings() {
+    $('.settings').removeClass('active')   
+}
+
+
+
+function saveSettings() {
+
+    let settingsObj = {}
+
+    $('.setting').each(function() {
+        let curVar = $(this).attr('data-var')
+        let curVal
+
+        if ( $(this).find('input').attr('type') == 'checkbox' ) {
+            curVal = $(this).find('input').prop("checked")
+        }
+        if ( $(this).find('input').attr('type') == 'number' ) {
+            curVal = $(this).find('input').val()
+        }
+
+        settingsObj[curVar] = curVal       
+    })
+
+    let settingsString = JSON.stringify(settingsObj)
+    localStorage.setItem("savedSettings", settingsString);
+
+    console.log(settingsString)
+    console.log('settings saved')
+
+    settingsToast('Settings saved!')
+
+}
+
+
+
+
+
+function defaultSettings() {
+    $('.setting').each(function() {
+        let defaultVal = $(this).find('input').attr('data-default')
+
+        if ( $(this).find('input').attr('type') == 'checkbox' ) {
+            if (defaultVal == 'true') {
+                $(this).find('input').prop('checked',true)
+            } else {
+                $(this).find('input').prop('checked',false)
+            }
+        }
+
+        if ( $(this).find('input').attr('type') == 'number' ) {
+            defaultVal = parseInt(defaultVal)
+            $(this).find('input').val(defaultVal)
+        }
+          
+    })
+
+    settingsToast('Settings reset, please save.')
+}
+
+function settingsToast(message) {
+
+    $('.settingsToast').html(message)
+    $('.settingsToast').addClass('animIn')
+    setTimeout(function() {
+        $('.settingsToast').removeClass('animIn')
+    }, 2000)
+
 }

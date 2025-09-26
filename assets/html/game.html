@@ -14,13 +14,34 @@
 
 
 <body class="gameView" id="body">
+
+    <button type="button" onclick="openSettings()" class="settingsOpen">Settings</button>
+    <div class="settings">
+        <div class="inner">
+            <div class="settingsInfo">
+                You have to refresh after saving for any settings changes to go into effect.
+            </div>
+
+            <div class="settingsControls">
+                <button type="button" class="settingsButton" onclick="closeSettings()">Close</button>
+                <button type="button" class="settingsButton" onclick="saveSettings()">Save</button>
+                <button type="button" class="settingsButton" onclick="defaultSettings()">Default</button>
+
+                <div class="settingsToast"></div>
+            </div>
+            
+        </div>
+    </div>
+
+
   <div id="app-wrapper">
 
         <section id="holding" class="gameScreen swapTar animIn">   
             <div class="holdingCopy"></div>
 
-            <div class="holdingPlant plantWrapper">
-                <div class="plant" data-stage="4"></div>
+            <div class="holdingPlant">
+                <!--<div class="plant" data-stage="4"></div>-->
+                <video class="plantVideo" src="../images/plant_growing_holding2.webm" autoplay muted loop></video>                
             </div>
             <div class="plantGraphicBG"></div>
 
@@ -123,7 +144,13 @@
                 </div>
 
                 <div class="countDown">
-                    <div class="countDown-Value"></div>
+                    <div class="countDown-Inner">
+                        <div class="countDown-Text">
+                            <span class="teal">Assignment Initiating...</span>
+                            <span class="white">Standby, Cadet</span>
+                        </div>
+                        <div class="countDown-Value"></div>
+                    </div>
                 </div>
 
                 <div class="plantWrapper">         

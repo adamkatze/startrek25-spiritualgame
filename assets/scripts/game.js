@@ -48,6 +48,7 @@ function preload () {
     this.load.image('icon_good03', '../images/icon_Positive words-1.png');
     this.load.image('icon_good04', '../images/icon_postive words-2.png');
     this.load.image('icon_good05', '../images/icon_positive words-3.png');
+    this.load.image('icon_good06', '../images/icon_testtube.png');
 
     this.load.image('icon_bad01', '../images/icon_no sun.png');
     this.load.image('icon_bad02', '../images/icon_no water.png');
@@ -55,7 +56,7 @@ function preload () {
     this.load.image('icon_bad04', '../images/icon_negative words-2.png');
     this.load.image('icon_bad05', '../images/icon_negative words-3.png');
 
-    goodIcons = ["icon_good01", "icon_good02", "icon_good03", "icon_good04", "icon_good05"];
+    goodIcons = ["icon_good01", "icon_good02", "icon_good03", "icon_good04", "icon_good05", "icon_good06"];
     badIcons  = ["icon_bad01", "icon_bad02", "icon_bad03", "icon_bad04", "icon_bad05"];
 
 
@@ -124,7 +125,8 @@ function create () {
         delay: iconSpawnTime,  
         callback: spawnIcon,   
         callbackScope: this,   
-        loop: true             
+        loop: true,
+        paused: true              
     });
 
 
@@ -220,11 +222,8 @@ function drawGame() {
     startTime = new Date()
    
     currentGameScreen = 'game'
-    gameOver = false
+    gameOver = false  
     
-    for (let i = 0; i < initialIconCount; i++) {
-       spawnIcon()
-    }
 
     
 }  
@@ -252,12 +251,18 @@ function spawnIcon() {
   const y = Phaser.Math.Between(100, 900);
   let icon = scene.matter.add.image(x, y, textureKey);
 
+  icon.value = 1
+  if (textureKey == 'icon_good06') {
+    icon.value = 2
+  }
   
   icon.setAlpha(0);
   icon.setScale(iconScale * 0.9);
   icon.isGood = isGood;
   icon.scored = false;
   icon.setBounce(0.4);
+
+
   
   icon.setInteractive({ draggable: true });
   scene.input.setDraggable(icon);
@@ -277,12 +282,18 @@ function spawnIcon() {
   if (iconsSpawnWithMovement) {
     const velX = Phaser.Math.Between(-10, 10);
     const velY = Phaser.Math.Between(-10, 10);
-    icon.setVelocity(velX, velY);
+    icon.setVelocity(velX, velY); 
+  }
 
+  if (iconsBounceMore) {
     icon.setBounce(0.9);
     icon.setFrictionAir(0.003); 
   }
 
+  //Stops icons from rotating if toggled off
+  if (!iconsCanRotate) {
+    icon.setFixedRotation();
+  }
 
 
   // Automatically despawn after 15 seconds
@@ -448,9 +459,9 @@ function handleScore(icon, i) {
 
     if (!icon.scored) {
        if (icon.isGood) {
-            currentScore = currentScore + 1
+            currentScore = currentScore + icon.value
         } else if ( currentScore > 0) {
-            currentScore = currentScore - 1
+            currentScore = currentScore - icon.value
         }           
 
         animateScore(icon.isGood) 

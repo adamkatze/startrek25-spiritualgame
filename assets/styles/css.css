@@ -244,13 +244,23 @@ section#holding .plantGraphicBG {
     opacity: 1;
     animation: opacityPulse 1s ease-in-out infinite;
 }
-.holdingPlant.plantWrapper {
-    right: 303px;
-    bottom: 281px;
+.holdingPlant{
+    position:absolute;
+    right: 393px;
+    bottom: 231px;
+    width: 400px;
+    height: 800px;
+    z-index: 5;
+    transform-origin: center 80%;
 }
-.holdingPlant.plantWrapper .plant {
+.holdingPlant .plant {
     opacity: 1 !important;
 }
+video.plantVideo {
+    width: 100%;
+    height: 100%;
+}
+
 
 .glowBlock {
     position: absolute;
@@ -588,22 +598,57 @@ section#instructions .plantGraphicBG {
 }
 
 .countDown {
+    position:Absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: var(--anim-speed);
+    display: flex;
+    align-content: center;
+    justify-content: center;    
+    background-color: #00000070;
+    z-index: 50;
+}
+.countDown-Inner {
     position: absolute;
     width: 400px;
     left: 760px;
     height: 400px;
     top: 300px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--anim-speed);
+    align-content: center;
+    justify-content: center;   
+    flex-wrap: wrap;
 }
+.countDown-Text {
+    flex: 0 0 100%;
+    font-family: var(--reg);
+    text-align: center;
+}
+
 .countDown-Value {
     font-size: 150px;
     font-family: var(--bold);
+    flex: 0 0 100%;
+    text-align: center;
 }
-
-
+.countDown-Text span {
+    display: block;
+    font-size: 32px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-bottom: 15px;
+}
+span.teal {
+    color: var(--teal);
+}
+span.white {
+    color: white;
+}
+.countDown-Text span.white {
+    font-family: var(--bold);
+}
 
 .nameBlock {
     position: absolute;
@@ -625,6 +670,7 @@ section#instructions .plantGraphicBG {
     justify-content: center;
     text-align: center;
     padding-top: 30px;
+    text-transform: uppercase;
 }
 
 .playerName {
@@ -640,7 +686,7 @@ section#instructions .plantGraphicBG {
 .uiBlur {
     position:absolute;
     backdrop-filter: blur(3px);
-        background-color: #000000aa;
+    background-color: #000000aa;
 }
 .uiBlur[data-id="1"] {
     top: 50px;
@@ -928,3 +974,110 @@ section#score .plantGraphicBG {
 
 
 
+/*----------------Settings Menu-----------------------*/
+
+.settings {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 15px;
+    background-color: #00000070;
+    z-index: 100;    
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.settings.active {
+    display:flex;
+}
+
+.settings .inner {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, .4);
+    padding: 15px;
+    background-color: black;
+}
+
+.setting {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.label span {
+    display: block;
+}
+
+span.label {
+    font-family: sans-serif;
+    font-weight: 700;
+    color: var(--teal);
+    margin: 0 0 5px 0;
+}
+span.desc {
+    font-size: 12px;
+    font-family: sans-serif;
+        color: #ccc;
+}
+span.default {
+    font-size: 10;
+    font-family: sans-serif;
+    color: #aaa;
+}
+.setting input {
+    order: 10;
+    margin-left: auto;
+}
+
+
+.settingsControls {
+    order: 50;
+    margin-top: 15px;
+}
+
+button.settingsButton {
+    border: 0px !important;
+    padding: 5px 10px;
+    font-family: var(--bold);
+    background-color: var(--teal);
+    color: black;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+input[type="number"] {
+    background: #ccc;
+    text-align: right;
+}
+button.settingsOpen {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display:none;
+}
+button.settingsOpen.active {
+    display:block;
+}
+
+.settingsInfo {
+    font-family: sans-serif;
+    margin: 0 0 30px 0;
+}
+
+
+
+.settingsToast {
+    opacity: 0;
+    transition: .3s;
+    display: inline-block;
+    padding-left: 15px;
+    font-family: sans-serif;
+}
+.settingsToast.animIn {
+    opacity: 1;
+}

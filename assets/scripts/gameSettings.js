@@ -1,22 +1,76 @@
 //---------------Configurable Options------------------------
 
-const showInstructionsScreen = true         //Shows the instruction screen if true, otherwise goes directly to game
-const instructionsScreenTimeout = 8000      //Timeout in ms for before the instruction screen goes away and game begins
-const gameLength = 30000;                   //Length of gameplay in ms
-const scorePerStage = [0,1,4,9,16]          //Breakpoints for total score vs plant's growth stage
+var showInstructionsScreen = true         //Shows the instruction screen if true, otherwise goes directly to game
+var instructionsScreenTimeout = 8000      //Timeout in ms for before the instruction screen goes away and game begins
+var gameLength = 30000;                   //Length of gameplay in ms
+var scorePerStage = [0,1,4,9,16]          //Breakpoints for total score vs plant's growth stage
 
-const iconsSpawnWithMovement = true         //If true, icons will spawn with some velocity
-const initialIconCount = 5                  //How many icons are spawned at the start of the game
-const maxIcons = 13                         //Maximum amount of icons on screen at any given time
-const maxIconLife = 12000                   //How long an untouched icon will stay on screen before being despawned
-const iconSpawnTime = 3000                  //How frequently a new icon will spawn
+var iconsSpawnWithMovement = false        //If true, icons will spawn with some velocity
+var iconsBounceMore = true                //If true, icons will have more bounce and less inertia decay
+var initialIconCount = 5                  //How many icons are spawned at the start of the game
+var maxIcons = 13                         //Maximum amount of icons on screen at any given time
+var maxIconLife = 12000                   //How long an untouched icon will stay on screen before being despawned
+var iconSpawnTime = 3000                  //How frequently a new icon will spawn
+var iconsCanRotate = false                //If true icons can rotate
 
-const playCollisionSFX = true               //If true, plays a sound effect on all icon and world boundray collisions
-const gameOverTimeout = 10000               //How long to wait after game over before automatically restarting the game
+var playCollisionSFX = true               //If true, plays a sound effect on all icon and world boundray collisions
+var gameOverTimeout = 10000               //How long to wait after game over before automatically restarting the game
+
+var holdingTextRefreshRate = 10000        //How often to retype the text on the holding screen
 
 
-
-
+const settingsList = [
+    {
+        "var":"gameLength",
+        "type":"number",
+        "desc":"Length of gameplay, in ms (30000 = 30 seconds)",
+    },
+    {
+        "var":"iconsSpawnWithMovement",
+        "type":"bool",
+        "desc":"If true, icons will spawn with some velocity",
+    },
+    {
+        "var":"iconsBounceMore",
+        "type":"bool",
+        "desc":"If true, icons will have more bounce and less inertia decay",
+    },
+    {
+        "var":"initialIconCount",
+        "type":"number",
+        "desc":"How many icons are spawned at the start of the game",
+    },
+    {
+        "var":"maxIcons",
+        "type":"number",
+        "desc":"Maximum amount of icons on screen at any given time",
+    },
+    {
+        "var":"maxIconLife",
+        "type":"number",
+        "desc":"How long an untouched icon will stay on screen before being despawned, in ms",
+    },
+    {
+        "var":"iconSpawnTime",
+        "type":"number",
+        "desc":"How frequently a new icon will spawn in ms",
+    },
+    {
+        "var":"playCollisionSFX",
+        "type":"bool",
+        "desc":"If true, plays a sound effect on all icon and world boundray collisions",
+    },
+    {
+        "var":"instructionsScreenTimeout",
+        "type":"number",
+        "desc":"Timeout before the instruction screen goes away automatically and game begins, in ms ",
+    },
+    {
+        "var":"gameOverTimeout",
+        "type":"number",
+        "desc":"How long to wait after game over before automatically restarting the game, in ms",
+    }
+]
 //------------------------------Game Settings------------------------------------
 const gameWidth = 1920          
 const gameHeight = 1080
@@ -33,7 +87,7 @@ const growByStages = true
 
 const typeOutGameText = true
 var holdingRefresh
-const holdingTextRefreshRate = 10000
+
 
 const holdingCopy = [
     "Welcome, Cadet.",
