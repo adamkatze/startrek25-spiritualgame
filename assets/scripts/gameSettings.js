@@ -108,9 +108,9 @@ const insCopyGood = [
     "to make it grow."
 ]
 const insCopyBad = [
-    "Swipe away any harmfuls",
-    "element that threaten .",
-    "its survival"
+    "Swipe away any harmful",
+    "elements that threaten",
+    "its survival."
 ]
 const insCopyBottom = [
     "The stronger the growth,",
