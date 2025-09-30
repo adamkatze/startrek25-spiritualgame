@@ -33,6 +33,12 @@ function initApp() {
     window.addEventListener('resize', scaleToFit);
     window.addEventListener('load', scaleToFit);
 
+    if (holdingPlantOnlyGrows) {
+        $('#loopingVid').remove()
+    } else {
+        $('#singleVid').remove()
+    }
+
     initFrames() 
     initGame()
     
@@ -218,12 +224,24 @@ function showGameOver() {
     //Reset game automatically if user doesnt interact
     setTimeout(function() {
         if (currentGameScreen == 'gameover') {
-            resetGame()
+            showBookend()
         }
     }, gameOverTimeout)
 }
 
 
+function showBookend() {
+    currentGameScreen = 'bookend'
+    animateSwap('#score', '#bookend', menuAnimSpeed, 0, animatingMenu)
+
+    //Reset game automatically if user doesnt interact
+    setTimeout(function() {
+        if (currentGameScreen == 'bookend') {
+            resetGame()
+        }
+    }, gameOverBookendTimeout)
+
+}
 
 
 
@@ -236,10 +254,12 @@ function resetGame() {
     timerStart = false
     lastIconWasGood = true
 
+    $("#singleVid").get(0).currentTime = 0;
+
     $('.countDown').removeClass('fadeOut')
     $('.gameTimer').removeClass('warning')
 
-    animateSwap('#score', '#holding', menuAnimSpeed, 0, animatingMenu)
+    animateSwap('#bookend', '#holding', menuAnimSpeed, 0, animatingMenu)
 
     sfx_bridge_01.play()
 
@@ -249,6 +269,7 @@ function resetGame() {
         updatePlantLevel()
 
         gameInProgress = false
+        $("#singleVid").get(0).play()
     }, menuAnimSpeed)
     
 }

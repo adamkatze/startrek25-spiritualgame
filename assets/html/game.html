@@ -41,7 +41,8 @@
 
             <div class="holdingPlant">
                 <!--<div class="plant" data-stage="4"></div>-->
-                <video class="plantVideo" src="../images/plant_growing_holding2.webm" autoplay muted loop></video>                
+                <video class="plantVideo" id="loopingVid" src="../images/plant_growing_holding2.webm" autoplay muted loop></video> 
+                <video class="plantVideo" id="singleVid" src="../images/plantTransparent.webm" autoplay muted></video>                
             </div>
             <div class="plantGraphicBG"></div>
 
@@ -208,11 +209,13 @@
                 <div class="glowTab" data-id="3"></div>
             </div>
 
-            <button class="next" onclick="resetGame()">
+            <button class="next" onclick="showBookend()">
                 <img src="../images/button_complete.png">
             </button>
         </section>
 
+
+        <section id="bookend" class="gameScreen swapTar hide"></section>
 
 
 

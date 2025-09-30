@@ -2,11 +2,11 @@
 
 var showInstructionsScreen = true         //Shows the instruction screen if true, otherwise goes directly to game
 var instructionsScreenTimeout = 8000      //Timeout in ms for before the instruction screen goes away and game begins
-var gameLength = 30000;                   //Length of gameplay in ms
-var scorePerStage = [0,1,4,9,16]          //Breakpoints for total score vs plant's growth stage
+var gameLength = 45000;                   //Length of gameplay in ms
+var scorePerStage = [0,1,3,6,9]           //Breakpoints for total score vs plant's growth stage
 
-var iconsSpawnWithMovement = false        //If true, icons will spawn with some velocity
-var iconsBounceMore = true                //If true, icons will have more bounce and less inertia decay
+var iconsSpawnWithMovement = true        //If true, icons will spawn with some velocity
+var iconsBounceMore = true               //If true, icons will have more bounce and less inertia decay
 var initialIconCount = 5                  //How many icons are spawned at the start of the game
 var maxIcons = 13                         //Maximum amount of icons on screen at any given time
 var maxIconLife = 12000                   //How long an untouched icon will stay on screen before being despawned
@@ -15,9 +15,11 @@ var iconsCanRotate = false                //If true icons can rotate
 
 var playCollisionSFX = true               //If true, plays a sound effect on all icon and world boundray collisions
 var gameOverTimeout = 10000               //How long to wait after game over before automatically restarting the game
+var gameOverBookendTimeout = 10000        //How long to wait on the bookend logo screen
 
-var holdingTextRefreshRate = 10000        //How often to retype the text on the holding screen
+var holdingTextRefreshRate = 14000        //How often to retype the text on the holding screen
 
+var holdingPlantOnlyGrows = true          //If true, holding screen plant only grows (doesnt shrink back down)
 
 const settingsList = [
     {
@@ -106,8 +108,9 @@ const insCopyGood = [
     "to make it grow."
 ]
 const insCopyBad = [
-    "Avoid any harmful elements",
-    "that threaten its survival."
+    "Swipe away any harmfuls",
+    "element that threaten .",
+    "its survival"
 ]
 const insCopyBottom = [
     "The stronger the growth,",

@@ -1081,3 +1081,11 @@ button.settingsOpen.active {
 .settingsToast.animIn {
     opacity: 1;
 }
+
+
+section#bookend {
+    background-image: url('../images/gameover_screen.png');
+    background-size: contain;
+    background-position:center;
+    background-repeat: no-repeat;
+}
