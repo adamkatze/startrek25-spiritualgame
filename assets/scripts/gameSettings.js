@@ -1,7 +1,7 @@
 //---------------Configurable Options------------------------
 
 var showInstructionsScreen = true         //Shows the instruction screen if true, otherwise goes directly to game
-var instructionsScreenTimeout = 8000      //Timeout in ms for before the instruction screen goes away and game begins
+var instructionsScreenTimeout = 15000     //Timeout in ms for before the instruction screen goes away and game begins
 var gameLength = 45000;                   //Length of gameplay in ms
 var scorePerStage = [0,1,3,6,9]           //Breakpoints for total score vs plant's growth stage
 
@@ -15,7 +15,7 @@ var iconsCanRotate = false                //If true icons can rotate
 
 var playCollisionSFX = true               //If true, plays a sound effect on all icon and world boundray collisions
 var gameOverTimeout = 10000               //How long to wait after game over before automatically restarting the game
-var gameOverBookendTimeout = 10000        //How long to wait on the bookend logo screen
+var gameOverBookendTimeout = 5000        //How long to wait on the bookend logo screen
 
 var holdingTextRefreshRate = 14000        //How often to retype the text on the holding screen
 
