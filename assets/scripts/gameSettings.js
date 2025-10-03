@@ -21,6 +21,8 @@ var holdingTextRefreshRate = 14000        //How often to retype the text on the 
 
 var holdingPlantOnlyGrows = true          //If true, holding screen plant only grows (doesnt shrink back down)
 
+var useFirstNameOnly = false
+
 const settingsList = [
     {
         "var":"gameLength",

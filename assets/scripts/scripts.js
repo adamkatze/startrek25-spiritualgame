@@ -106,7 +106,14 @@ function begin(userName = '') {
 
         sfx_bridge_01.play()
 
-        $('.playerName').html(`Cadet<br>${userName}`)
+        //get first name
+        if (useFirstNameOnly) {
+            let firstName = userName.trim().split(" ")[0] || "";
+            $('.playerName').html(`Cadet<br>${firstName}`)
+        } else {
+            $('.playerName').html(`Cadet<br>${userName}`)
+        }
+        
 
         if (showInstructionsScreen) {
             showInstructions()
