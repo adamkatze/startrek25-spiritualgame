@@ -138,12 +138,14 @@ function showInstructions() {
     typeWriter('.insTextBad',    insCopyBad, 30, 50);
     typeWriter('.insTextBottom', insCopyBottom, 30, 50);
 
+    if (instructionsScreenCanTimeout) {
+        let instructionsTimeout = setTimeout(function() {
+            if (gameOver) {
+                startGame()
+            }        
+        }, instructionsScreenTimeout)
+    }
 
-    let instructionsTimeout = setTimeout(function() {
-        if (gameOver) {
-            startGame()
-        }        
-    }, instructionsScreenTimeout)
 
 }
 
