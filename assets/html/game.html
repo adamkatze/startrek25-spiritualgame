@@ -1,5 +1,6 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="..\scripts\socket.io.js"></script>
     <script src="..\scripts\jquery.js"></script>
     <script src="..\scripts\phaser.min.js"></script>
@@ -226,6 +227,7 @@
 
 
         <script>
+           document.addEventListener('contextmenu', event => event.preventDefault());
            initApp()        
         </script>
 
