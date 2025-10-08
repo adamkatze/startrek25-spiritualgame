@@ -2,6 +2,7 @@
 
 var showInstructionsScreen = true         //Shows the instruction screen if true, otherwise goes directly to game
 var instructionsScreenTimeout = 15000     //Timeout in ms for before the instruction screen goes away and game begins
+var instructionsScreenCanTimeout = false
 var gameLength = 45000;                   //Length of gameplay in ms
 var scorePerStage = [0,1,3,6,9]           //Breakpoints for total score vs plant's growth stage
 

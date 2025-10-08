@@ -143,6 +143,8 @@ section#holding button.touchArea {
     left:0;
     width: 715px;
     height: 200px;
+
+    pointer-events: none;
 }
 
 .holdingArrows {
