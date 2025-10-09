@@ -121,7 +121,8 @@ function begin(userName = '') {
             startGame() 
         }
     } else {
-        console.log('game in progress')
+        console.log('game in progress, reset game')
+        resetGame()
     }
 }
 
@@ -268,7 +269,7 @@ function resetGame() {
     $('.countDown').removeClass('fadeOut')
     $('.gameTimer').removeClass('warning')
 
-    animateSwap('#bookend', '#holding', menuAnimSpeed, 0, animatingMenu)
+    animateSwap('.gameScreen.animIn', '#holding', menuAnimSpeed, 0, animatingMenu)
 
     sfx_bridge_01.play()
 
