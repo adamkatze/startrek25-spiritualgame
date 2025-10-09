@@ -53,6 +53,7 @@ html, body {
     position:relative;
     height: 100%;
     width: 100%;
+    touch-action: none; /* disable pinch to zoom */
 }
 * {
     box-sizing: border-box;
